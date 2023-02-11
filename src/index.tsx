@@ -1,87 +1,35 @@
-import React from "react";
-
-
-// 8 Array of objects inside object -> object
-
-
-// 9 Object inside an object -> array -> object ->  object
-let man6 = {
-    name: 'John',
-    age: 28,
-    mother: {
-        name: "Kate",
-        age: 50,
-        work: {
-            position: "doctor",
-            experience: 15
-        },
-        parents: [
-            {
-                name: "Kevin",
-                age: 80,
-                favoriteDish: {
-                    title: "borscht"
-                }
-            },
-            {
-                name: "Jennifer",
-                age: 78,
-                favoriteDish: {
-                    title: "sushi"
-                }
-            },
-        ]
-    }
-};
-
-let man6FullCopy  //  your code
-
-
-//10 Array of objects inside an object -> object -> array -> object ->  object
-let man7 = {
-    name: 'John',
-    age: 28,
-    mother: {
-        name: "Kate",
-        age: 50,
-        work: {
-            position: "doctor",
-            experience: 15
-        },
-        parents: [
-            {
-                name: "Kevin",
-                age: 80,
-                favoriteDish: {
-                    title: "borscht",
-                    ingredients: [
-                        {title: "beet", amount: 3},
-                        {title: "potatoes", amount: 5},
-                        {title: "carrot", amount: 1},
-                    ]
-                }
-            },
-            {
-                name: "Jennifer",
-                age: 78,
-                favoriteDish: {
-                    title: "sushi",
-                    ingredients: [
-                        {title: "fish", amount: 1},
-                        {title: "rise", amount: 0.5}
-                    ]
-                }
-            },
-        ]
-    }
-};
-
-let man7FullCopy  //  your code
-
-
-const X = () => {
-
-
-
+type StateType = {
+    volume: number // in percents
+    trackUrl: string // 'https://blabla.com/track01.mp3',
+    currentPlayPosition: number // milliseconds,
 }
-X()
+
+export const reducer = (state: StateType, action: any) => {
+    switch (action.type) {
+        case 'TRACK-URL-CHANGED':
+            return {
+                ...state,
+                trackUrl: action.url
+            }
+        case 'TRACK-MUTED':
+            return {
+                ...state,
+                volume: 0
+            }
+        case 'TRACK-REWOUND-TO-START':
+            return {
+                ...state,
+                currentPlayPosition: 0
+            }
+        default:
+            return state
+    }
+}
+
+const muteTrackAC = () => ({type: 'TRACK-MUTED'})
+const changeTrackAC = (url: string) => ({type: 'TRACK-URL-CHANGED', url})
+// перемотатьНаНачало:
+const rewindToStart = () => ({type: 'TRACK-REWOUND-TO-START'})
+
+// Какие типы должны быть вместо XXX, YYY и ZZZ?
+// Ответ дать через пробел, например:   'BLABLA' 'HEYНЕY' 'HIPHOP'
